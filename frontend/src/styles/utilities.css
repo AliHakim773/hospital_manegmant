@@ -1,0 +1,69 @@
+:root {
+    --section-inline-p: 2rem;
+    --section-block-p: 3rem;
+}
+.page {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+}
+.d-flex {
+    display: flex;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+.circle {
+    border-radius: 50%;
+}
+.section,
+.section-header,
+.section-body {
+    width: 100%;
+}
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-content {
+    flex: 1;
+    max-width: 1340px;
+    padding: var(--section-block-p) var(--section-inline-p);
+}
+.section-header {
+    display: flex;
+}
+.section-body {
+    display: flex;
+    flex-direction: column;
+}
+@media only screen and (max-width: 992px) {
+    :root {
+        --section-block-p: 2.5rem;
+    }
+    .section-content {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    :root {
+        --section-inline-p: 1.5rem;
+        --section-block-p: 2rem;
+    }
+}
+@media only screen and (max-width: 479px) {
+    :root {
+        --section-inline-p: 1rem;
+        --section-block-p: 1rem;
+    }
+}

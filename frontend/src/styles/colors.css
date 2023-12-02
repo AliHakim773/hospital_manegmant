@@ -1,0 +1,32 @@
+:root {
+    --primary-color: blue;
+    --secondary-color: yellow;
+    --confirm-color: green;
+    --danger-color: red;
+    --white-color: #e6e6e6;
+    --black-color: #141414;
+}
+.primary-color {
+    color: var(--primary-color);
+}
+.primary-bg {
+    background-color: var(--primary-color);
+}
+.secondary-color {
+    color: var(--secondary-color);
+}
+.secondary-bg {
+    background-color: var(--secondary-color);
+}
+.confirm-color {
+    color: var(--confirm-color);
+}
+.confirm-bg {
+    background-color: var(--confirm-color);
+}
+.danger-color {
+    color: var(--danger-color);
+}
+.danger-bg {
+    background-color: var(--danger-color);
+}
