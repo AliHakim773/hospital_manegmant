@@ -68,7 +68,7 @@ try {
         $query->bind_param('issssssi', $user_id, $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
         $query->execute();
 
-        // added data to patient table
+        // added data to doctor table
         $query =
             $mysqli->prepare('insert into doctors(user_id,specialization) 
         values(?,?)');
