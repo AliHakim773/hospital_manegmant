@@ -26,11 +26,11 @@ if ($num_rows == 0) {
 } else {
     if (password_verify($password, $hashed_password)) {
         $key = 'secret';
-        $payload = array(
+        $payload = [
             'user_id' => $id,
             'username' => $username,
             'role' => $role
-        );
+        ];
         $algorithm = 'HS256';
         $token = JWT::encode($payload, $key, $algorithm);
 
