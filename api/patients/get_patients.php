@@ -24,6 +24,8 @@ try {
         while ($patients = $array->fetch_assoc()) {
             $response[] = $patients;
         }
+        $response['status'] = 'success';
+
 
         echo json_encode($response);
     } else {
@@ -31,8 +33,6 @@ try {
         $response['msg'] = 'access denied';
         echo json_encode($response);
     }
-
-    echo json_encode($data);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'invalid token';
