@@ -39,7 +39,7 @@ if ($username == $name) {
     // added data to the users table
     $query =
         $mysqli->prepare('insert into users(username,password,role) 
-            values(?,?,?,?)');
+            values(?,?,?)');
     $query->bind_param('sss', $username, $hashed_password, $role);
     $query->execute();
 
@@ -49,7 +49,7 @@ if ($username == $name) {
     // added data to information table
     $query =
         $mysqli->prepare('insert into information(user_id, first_name,last_name,date_of_birth,address,gender,email,phone_number) 
-            values(?,?,?,?,?,?,?)');
+            values(?,?,?,?,?,?,?,?)');
 
     $query->bind_param('issssssi', $user_id, $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
     $query->execute();
