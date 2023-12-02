@@ -41,4 +41,18 @@ if ($username == $name) {
 
     $query->bind_param('ssssssi', $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
     $query->execute();
+
+    // got the id of the data added
+    $lastInsertId = $mysqli->insert_id;
+
+    // added data to the users table
+    $query =
+        $mysqli->prepare('insert into users(username,password,role,information_id) 
+            values(?,?,?,?)');
+    $query->bind_param('sssi', $username, $hashed_password, $role, $lastInsertId);
+    $query->execute();
+
+    $response['status'] = 'success';
+    $response['msg'] = 'signup successful';
+    echo json_encode($response);
 }
