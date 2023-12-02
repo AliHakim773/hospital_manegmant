@@ -15,8 +15,17 @@ $secretKey = 'secret';
 $response = [];
 try {
     $data = JWT::decode($token, new Key($secretKey, 'HS256'));
+} catch (Exception $e) {
+    $response['status'] = 'fail';
+    $response['msg'] = 'invalid token';
+    echo json_encode($response);
+}
+
+try {
     if ($data->role == 'admin') {
-        $query = $mysqli->prepare('select patients.*, information.* from patients patients join users on patients.user_id = users.user_id join information on users.information_id = information.information_id');
+        $query = $mysqli->prepare('select patients.*, information.*, users.* from users 
+                    join patients on users.user_id = patients.user_id 
+                    join information on users.user_id = information.user_id ');
         $query->execute();
 
         $array = $query->get_result();
@@ -35,6 +44,6 @@ try {
     }
 } catch (Exception $e) {
     $response['status'] = 'fail';
-    $response['msg'] = 'invalid token';
+    $response['msg'] = 'error';
     echo json_encode($response);
 }
