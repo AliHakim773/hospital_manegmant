@@ -34,4 +34,11 @@ if ($username == $name) {
     $response['msg'] = 'username already exists';
     echo json_encode($response);
 } else {
+    // added data to information table
+    $query =
+        $mysqli->prepare('insert into information(first_name,last_name,date_of_birth,address,gender,email,phone_number) 
+            values(?,?,?,?,?,?,?)');
+
+    $query->bind_param('ssssssi', $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
+    $query->execute();
 }
