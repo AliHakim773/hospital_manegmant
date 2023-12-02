@@ -2,6 +2,9 @@
 
 header('Access-Controll-Allow-Origin:*');
 include('../database/index.php');
+include('../vendor/autoload.php');
+
+use Firebase\JWT\JWT;
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -22,10 +25,18 @@ if ($num_rows == 0) {
     echo json_encode($response);
 } else {
     if (password_verify($password, $hashed_password)) {
+        $key = 'secret';
+        $payload = array(
+            'user_id' => $id,
+            'username' => $username,
+            'role' => $role
+        );
+        $algorithm = 'HS256';
+        $token = JWT::encode($payload, $key, $algorithm);
+
         $response['status'] = 'logged in';
-        $response['user_id'] = $id;
-        $response['username'] = $username;
-        $response['role'] = $role;
+        $response['token'] = $token;
+
         echo json_encode($response);
     } else {
         $response['status'] = 'wrong credntails';
