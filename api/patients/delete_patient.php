@@ -22,8 +22,19 @@ try {
     $response['msg'] = 'invalid token';
     echo json_encode($response);
 }
+
+//checking if the username exists
+$query = $mysqli->prepare('select role from users where user_id=?');
+$query->bind_param('i', $user_id);
+$query->execute();
+
+$query->store_result();
+$query->bind_result($role);
+$query->fetch();
+
 try {
-    //code...
+    if ($role != "patient") die('not a patient');
+
     if ($data->role == 'admin') {
 
         $query = $mysqli->prepare('delete from users where user_id=?');
