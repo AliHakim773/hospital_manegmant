@@ -17,6 +17,8 @@ $address = $_POST['address'];
 $gender = $_POST['gender'];
 $email = $_POST['email'];
 $phone_number = $_POST['phone_number'];
+$medical_history = $_POST['medical_history'] ?? null;
+$specialization = $_POST['specialization'] ?? null;
 
 //checking if the username exists
 $query = $mysqli->prepare('select username from users where username=?');
@@ -43,14 +45,31 @@ if ($username == $name) {
     $query->execute();
 
     // got the id of the data added
-    $lastInsertId = $mysqli->insert_id;
+    $last_insert_id = $mysqli->insert_id;
 
     // added data to the users table
     $query =
         $mysqli->prepare('insert into users(username,password,role,information_id) 
             values(?,?,?,?)');
-    $query->bind_param('sssi', $username, $hashed_password, $role, $lastInsertId);
+    $query->bind_param('sssi', $username, $hashed_password, $role, $last_insert_id);
     $query->execute();
+
+    // got the id of the data added
+    $last_insert_id = $mysqli->insert_id;
+
+    if ($role == 'doctor') {
+        $query =
+            $mysqli->prepare('insert into doctors(user_id,specialization) 
+                values(?,?)');
+        $query->bind_param('sssi', $last_insert_id, $specialization);
+        $query->execute();
+    } else if ($role == 'patient') {
+        $query =
+            $mysqli->prepare('insert into patients(user_id,medical_history) 
+                values(?,?)');
+        $query->bind_param('ss', $last_insert_id, $medical_history);
+        $query->execute();
+    }
 
     $response['status'] = 'success';
     $response['msg'] = 'signup successful';
