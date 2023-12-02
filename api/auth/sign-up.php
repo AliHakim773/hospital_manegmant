@@ -36,38 +36,35 @@ if ($username == $name) {
     $response['msg'] = 'username already exists';
     echo json_encode($response);
 } else {
-    // added data to information table
-    $query =
-        $mysqli->prepare('insert into information(first_name,last_name,date_of_birth,address,gender,email,phone_number) 
-            values(?,?,?,?,?,?,?)');
-
-    $query->bind_param('ssssssi', $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
-    $query->execute();
-
-    // got the id of the data added
-    $last_insert_id = $mysqli->insert_id;
-
     // added data to the users table
     $query =
-        $mysqli->prepare('insert into users(username,password,role,information_id) 
+        $mysqli->prepare('insert into users(username,password,role) 
             values(?,?,?,?)');
-    $query->bind_param('sssi', $username, $hashed_password, $role, $last_insert_id);
+    $query->bind_param('sss', $username, $hashed_password, $role);
     $query->execute();
 
     // got the id of the data added
-    $last_insert_id = $mysqli->insert_id;
+    $user_id = $mysqli->insert_id;
+
+    // added data to information table
+    $query =
+        $mysqli->prepare('insert into information(user_id, first_name,last_name,date_of_birth,address,gender,email,phone_number) 
+            values(?,?,?,?,?,?,?)');
+
+    $query->bind_param('issssssi', $user_id, $first_name, $last_name, $date_of_birth, $address, $gender, $email, $phone_number);
+    $query->execute();
 
     if ($role == 'doctor') {
         $query =
             $mysqli->prepare('insert into doctors(user_id,specialization) 
                 values(?,?)');
-        $query->bind_param('sssi', $last_insert_id, $specialization);
+        $query->bind_param('is', $user_id, $specialization);
         $query->execute();
     } else if ($role == 'patient') {
         $query =
             $mysqli->prepare('insert into patients(user_id,medical_history) 
                 values(?,?)');
-        $query->bind_param('ss', $last_insert_id, $medical_history);
+        $query->bind_param('is', $user_id, $medical_history);
         $query->execute();
     }
 
