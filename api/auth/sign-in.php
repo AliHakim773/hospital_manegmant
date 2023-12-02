@@ -39,7 +39,8 @@ if ($num_rows == 0) {
 
         echo json_encode($response);
     } else {
-        $response['status'] = 'wrong credntails';
+        $response['status'] = 'fail';
+        $response['msg'] = 'wrong credentials';
         echo json_encode($response);
     }
 }
