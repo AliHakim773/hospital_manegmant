@@ -17,3 +17,21 @@ $address = $_POST['address'];
 $gender = $_POST['gender'];
 $email = $_POST['email'];
 $phone_number = $_POST['phone_number'];
+
+//checking if the username exists
+$query = $mysqli->prepare('select username from users where username=?');
+$query->bind_param('s', $username);
+$query->execute();
+
+$query->store_result();
+$query->bind_result($name);
+$query->fetch();
+
+
+$response = [];
+if ($username == $name) {
+    $response['status'] = 'fail';
+    $response['msg'] = 'username already exists';
+    echo json_encode($response);
+} else {
+}
