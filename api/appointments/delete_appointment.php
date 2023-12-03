@@ -25,26 +25,32 @@ $appointment_id = $_POST['appointment_id'];
 
 
 try {
-    // cheching if the room is available
-    $query = $mysqli->prepare('select appointment_id from appointments where appointment_id=?');
-    $query->bind_param('i', $appointment_id);
-    $query->execute();
+    if ($data->role == 'admin') {
+        // cheching if the room is available
+        $query = $mysqli->prepare('select appointment_id from appointments where appointment_id=?');
+        $query->bind_param('i', $appointment_id);
+        $query->execute();
 
-    $query->store_result();
-    $num_rows = $query->num_rows;
+        $query->store_result();
+        $num_rows = $query->num_rows;
 
-    if ($num_rows == 0) die('Appointment not available');
+        if ($num_rows == 0) die('Appointment not available');
 
-    // added data to the users table
-    $query = $mysqli->prepare("delete from appointments where appointment_id=?");
-    $query->bind_param('i', $appointment_id);
-    $query->execute();
+        // added data to the users table
+        $query = $mysqli->prepare("delete from appointments where appointment_id=?");
+        $query->bind_param('i', $appointment_id);
+        $query->execute();
 
 
 
-    $response['status'] = 'success';
-    $response['msg'] = 'Appointment deleted';
-    echo json_encode($response);
+        $response['status'] = 'success';
+        $response['msg'] = 'Appointment deleted';
+        echo json_encode($response);
+    } else {
+        $response['status'] = 'fail';
+        $response['msg'] = 'access denied';
+        echo json_encode($response);
+    }
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'failed to delete appointment';
