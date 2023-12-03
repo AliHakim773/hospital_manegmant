@@ -87,6 +87,6 @@ try {
     }
 } catch (Exception $e) {
     $response['status'] = 'fail';
-    $response['msg'] = 'failed to add appointment';
+    $response['msg'] = 'failed to update appointment';
     echo json_encode($response);
 }
