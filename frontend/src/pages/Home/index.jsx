@@ -7,10 +7,10 @@ function Home() {
     return (
         <div className='page home-page'>
             <div className='sign d-flex flex-center flex-column'>
-                <Link className='link ' to={"/sign-in"}>
+                <Link className='btn ' to={"/sign-in"}>
                     Sign in
                 </Link>
-                <Link className='link ' to={"/sign-up"}>
+                <Link className='btn ' to={"/sign-up"}>
                     Sign up
                 </Link>
             </div>

@@ -22,6 +22,12 @@
     justify-content: center;
     align-items: center;
 }
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.gap-1 {
+    gap: 5px;
+}
 .circle {
     border-radius: 50%;
 }
@@ -47,6 +53,22 @@
     display: flex;
     flex-direction: column;
 }
+.pt-1 {
+    padding-block: 0.5rem;
+}
+.btn {
+    margin: 1rem 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: gray;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+.btn:hover {
+    background-color: antiquewhite;
+}
+
 @media only screen and (max-width: 992px) {
     :root {
         --section-block-p: 2.5rem;

@@ -8,15 +8,3 @@
     background-color: #e4e4e4;
     border-radius: 10px;
 }
-.link {
-    margin: 1rem 0.5rem;
-    padding: 0.5rem 0.75rem;
-    background-color: gray;
-    border: 1px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-}
-.link:hover {
-    background-color: antiquewhite;
-}
