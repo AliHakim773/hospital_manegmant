@@ -43,6 +43,6 @@ try {
     }
 } catch (Exception $e) {
     $response['status'] = 'fail';
-    $response['msg'] = 'failed to delete appointment';
+    $response['msg'] = 'failed to get appointment';
     echo json_encode($response);
 }
