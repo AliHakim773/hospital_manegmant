@@ -43,6 +43,6 @@ try {
     }
 } catch (Exception $e) {
     $response['status'] = 'fail';
-    $response['msg'] = 'failed to delete doctor';
+    $response['msg'] = 'failed to get doctor';
     echo json_encode($response);
 }
