@@ -1,6 +1,6 @@
 <?php
 
-header('Access-Controll-Allow-Origin:*');
+header('Access-Control-Allow-Origin:*');
 include('../database/index.php');
 include('../vendor/autoload.php');
 

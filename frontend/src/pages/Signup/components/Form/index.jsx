@@ -1,4 +1,5 @@
 import React, { useRef } from "react"
+import axios from "axios"
 
 import "./styles.css"
 
@@ -14,8 +15,11 @@ function Form() {
     const genderEl = useRef()
     const roleEl = useRef()
 
-    const handleSubmit = () => {
-        console.log(usernameEl.current.value)
+    const handleSubmit = async () => {
+        const test = await axios.get(
+            "http://localhost/hospital_manegmant/api/database/test.php"
+        )
+        console.log(test)
     }
 
     return (
