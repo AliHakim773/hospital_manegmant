@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Sginin from "./pages/Signin"
-
-import "./styles/index.css"
 import { Provider } from "react-redux"
 import { store } from "./core/redux/store"
+
+import Home from "./pages/Home"
+import Signin from "./pages/Signin"
+import Signup from "./pages/Signup"
+
+import "./styles/index.css"
 
 function App() {
     return (
@@ -13,7 +15,8 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route element={<Home />} path={"/"} />
-                        <Route element={<Sginin />} path={"/sign-in"} />
+                        <Route element={<Signin />} path={"/sign-in"} />
+                        <Route element={<Signup />} path={"/sign-up"} />
                     </Routes>
                 </BrowserRouter>
             </div>

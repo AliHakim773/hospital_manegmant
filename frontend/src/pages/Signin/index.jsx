@@ -1,7 +1,7 @@
 import React from "react"
 
-function Sginin() {
+function Signin() {
     return <div>Sign</div>
 }
 
-export default Sginin
+export default Signin
