@@ -31,7 +31,7 @@ $status = 'pending';
 try {
     // cheching if the room is available
     $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and room_id=?');
-    $query->bind_param('ss', $schedule_id, $room_id);
+    $query->bind_param('ii', $schedule_id, $room_id);
     $query->execute();
 
     $query->store_result();
