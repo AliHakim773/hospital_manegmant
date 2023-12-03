@@ -27,7 +27,29 @@ $schedule_id = $_POST['schedule_id'];
 $room_id = $_POST['room_id'];
 $status = 'pending';
 
+
 try {
+    // cheching if the room is available
+    $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and room_id=?');
+    $query->bind_param('ss', $schedule_id, $room_id);
+    $query->execute();
+
+    $query->store_result();
+    $num_rows = $query->num_rows;
+
+    if ($num_rows != 0) die('Room not available');
+
+    // cheching if the room is available
+    $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and doctor_id=?');
+    $query->bind_param('ss', $schedule_id, $doctor_id);
+    $query->execute();
+
+    $query->store_result();
+    $num_rows = $query->num_rows;
+
+    if ($num_rows != 0) die('Doctor not available');
+
+
     // added data to the users table
     $query = $mysqli->prepare("insert into appointments(doctor_id,patient_id,schedule_id,room_id,status) 
         values(?,?,?,?,?)");
