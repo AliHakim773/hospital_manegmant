@@ -7,6 +7,7 @@ import Signin from "./pages/Signin"
 import Signup from "./pages/Signup"
 
 import "./styles/index.css"
+import Admin from "./pages/admin"
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                         <Route element={<Home />} path={"/"} />
                         <Route element={<Signin />} path={"/sign-in"} />
                         <Route element={<Signup />} path={"/sign-up"} />
+                        <Route element={<Admin />} path={"/admin"} />
                     </Routes>
                 </BrowserRouter>
             </div>

@@ -16,18 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode($json_data, true);
 
     if ($data !== null) {
-        // Access data like $data['key']
-        $username = $data['username'];
-        $password = $data['password'];
-
-        $response = [
-            'status' => 'success',
-            'message' => 'Data received successfully',
-            'username' => $username,
-            'password' => $password,
-        ];
-
-        echo json_encode($response);
     } else {
         // Handle invalid JSON data
         http_response_code(400); // Bad Request
