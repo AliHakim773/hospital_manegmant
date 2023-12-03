@@ -24,7 +24,10 @@ $patient_id = $_GET['patient_id'];
 
 try {
     if ($data->role == 'admin') {
-        $query = $mysqli->prepare('select * from patients where patient_id=?');
+        $query = $mysqli->prepare('select users.username, users.role, patients.*, information.* from users 
+                    join patients on users.user_id = patients.user_id 
+                    join information on users.user_id = information.user_id 
+                    where patients.patient_id = ?');
         $query->bind_param('i', $patient_id);
         $query->execute();
 
