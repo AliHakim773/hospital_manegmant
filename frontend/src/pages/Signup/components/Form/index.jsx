@@ -51,6 +51,7 @@ function Form() {
             medical_history,
             specialization,
         }
+
         await axios.post("auth/sign-up.php", body).then((res) => {
             if (res.data.status == "fail") {
                 setError(res.data.msg)
