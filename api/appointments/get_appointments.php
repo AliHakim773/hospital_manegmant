@@ -20,10 +20,6 @@ try {
     echo json_encode($response);
 }
 
-// getting data from url
-$appointment_id = $_POST['appointment_id'];
-
-
 try {
     if ($data->role == 'admin') {
         $query = $mysqli->prepare('select * from appointments');
