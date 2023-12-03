@@ -29,38 +29,41 @@ $status = 'pending';
 
 
 try {
-    // cheching if the room is available
-    $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and room_id=?');
-    $query->bind_param('ii', $schedule_id, $room_id);
-    $query->execute();
+    if ($data->role == 'admin') {
+        // cheching if the room is available
+        $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and room_id=?');
+        $query->bind_param('ii', $schedule_id, $room_id);
+        $query->execute();
 
-    $query->store_result();
-    $num_rows = $query->num_rows;
+        $query->store_result();
+        $num_rows = $query->num_rows;
 
-    if ($num_rows != 0) die('Room not available');
+        if ($num_rows != 0) die('Room not available');
 
-    // cheching if the room is available
-    $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and doctor_id=?');
-    $query->bind_param('ss', $schedule_id, $doctor_id);
-    $query->execute();
+        // cheching if the room is available
+        $query = $mysqli->prepare('select appointment_id from appointments where schedule_id=? and doctor_id=?');
+        $query->bind_param('ss', $schedule_id, $doctor_id);
+        $query->execute();
 
-    $query->store_result();
-    $num_rows = $query->num_rows;
+        $query->store_result();
+        $num_rows = $query->num_rows;
 
-    if ($num_rows != 0) die('Doctor not available');
+        if ($num_rows != 0) die('Doctor not available');
 
+        // added data to the users table
+        $query = $mysqli->prepare("insert into appointments(doctor_id,patient_id,schedule_id,room_id,status) 
+            values(?,?,?,?,?)");
+        $query->bind_param('iiiis', $doctor_id, $patient_id, $schedule_id, $room_id, $status);
+        $query->execute();
 
-    // added data to the users table
-    $query = $mysqli->prepare("insert into appointments(doctor_id,patient_id,schedule_id,room_id,status) 
-        values(?,?,?,?,?)");
-    $query->bind_param('iiiis', $doctor_id, $patient_id, $schedule_id, $room_id, $status);
-    $query->execute();
-
-
-
-    $response['status'] = 'success';
-    $response['msg'] = 'pending approval from admin';
-    echo json_encode($response);
+        $response['status'] = 'success';
+        $response['msg'] = 'pending approval from admin';
+        echo json_encode($response);
+    } else {
+        $response['status'] = 'fail';
+        $response['msg'] = 'access denied';
+        echo json_encode($response);
+    }
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'failed to add appointment';
