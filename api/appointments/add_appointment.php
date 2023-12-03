@@ -30,14 +30,14 @@ $status = 'pending';
 try {
     // added data to the users table
     $query = $mysqli->prepare("insert into appointments(doctor_id,patient_id,schedule_id,room_id,status) 
-        values(?,?,?,?,{$status})");
-    $query->bind_param('iiii', $doctor_id, $patient_id, $schedule_id, $room_id);
+        values(?,?,?,?,?)");
+    $query->bind_param('iiiis', $doctor_id, $patient_id, $schedule_id, $room_id, $status);
     $query->execute();
 
 
 
     $response['status'] = 'success';
-    $response['msg'] = 'doctor added successfully';
+    $response['msg'] = 'pending approval from admin';
     echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
