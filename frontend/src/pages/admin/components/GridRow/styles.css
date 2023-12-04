@@ -1,0 +1,12 @@
+.patient-grid-row:not(:last-child) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+.grid-cell {
+    border: 1px solid black;
+    word-break: break-all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
