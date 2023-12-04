@@ -10,6 +10,7 @@ $allheaders = getallheaders();
 $token = $allheaders['Authorization'];
 $secretKey = 'secret';
 
+
 $response = [];
 try {
     $data = JWT::decode($token, new Key($secretKey, 'HS256'));
@@ -18,8 +19,10 @@ try {
     $response['msg'] = 'invalid token';
     echo json_encode($response);
 }
+// $json_data = file_get_contents("php://input");
+// $data = json_decode($json_data, true);
 
-$user_id = $_POST['user_id'];
+$user_id = $_GET['user_id'];
 
 //checking if the username exists
 $query = $mysqli->prepare('select role from users where user_id=?');
@@ -31,8 +34,6 @@ $query->bind_result($role);
 $query->fetch();
 
 try {
-    if ($role != "doctor") die('not a doctor');
-
     if ($data->role == 'admin') {
 
         $query = $mysqli->prepare('delete from users where user_id=?');

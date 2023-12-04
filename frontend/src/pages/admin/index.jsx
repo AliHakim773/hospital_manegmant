@@ -8,19 +8,15 @@ import { extractUserSlice } from "../../core/redux/user/userSlice"
 import Header from "../../components/Header"
 
 import "./styles.css"
-import GridRow from "./components/GridRow"
 import PatientsTable from "./components/PatiensTable"
+import DoctorsTable from "./components/DoctorsTable"
 
 function Admin() {
-    const userState = useSelector(extractUserSlice)
-    const navigate = useNavigate()
-
     const [patients, setPatients] = useState([])
+    const [doctors, setDoctors] = useState([])
+    const [toggle, setToggle] = useState(true)
 
     useEffect(() => {
-        if (userState.role != "admin") {
-            navigate("/")
-        }
         const get = async () => {
             const token = localStorage.getItem("token")
             const headers = {
@@ -37,14 +33,13 @@ function Admin() {
                 headers
             )
             setPatients(patientsData)
-            console.log(patients)
-            const doctorssData = await requestData(
+            const doctorsData = await requestData(
                 "/doctors/get_doctors.php",
                 "GET",
                 {},
                 headers
             )
-            console.log(doctorssData)
+            setDoctors(doctorsData)
         }
         get()
     }, [])
@@ -53,16 +48,30 @@ function Admin() {
             <Header />
             <main>
                 <div className='table-nav d-flex flex-center'>
-                    <div className='patients-table btn'>
+                    <div
+                        className='patients-table btn'
+                        onClick={() => {
+                            setToggle(true)
+                        }}>
                         Show Patients Table
                     </div>
-                    <div className='doctors-table btn'>Show Doctors Table</div>
+                    <div
+                        className='doctors-table btn'
+                        onClick={() => {
+                            setToggle(false)
+                        }}>
+                        Show Doctors Table
+                    </div>
                     {/* <div className='patient-table btn'>Show Patient Table</div> */}
                 </div>
                 <div className='section'>
                     <div className='section-content'>
                         <div className='section-body'>
-                            <PatientsTable patients={patients} />
+                            {toggle ? (
+                                <PatientsTable patients={patients} />
+                            ) : (
+                                <DoctorsTable doctors={doctors} />
+                            )}
                         </div>
                     </div>
                 </div>

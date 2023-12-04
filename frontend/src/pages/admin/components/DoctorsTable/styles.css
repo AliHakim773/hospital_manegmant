@@ -1,0 +1,11 @@
+.patient-grid-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+.grid-cell {
+    font-size: 15px;
+    padding: 5px;
+    border: 1px solid black;
+    text-align: center;
+}
