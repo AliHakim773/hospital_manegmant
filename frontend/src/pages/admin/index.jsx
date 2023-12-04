@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { requestData } from "../../core/axios"
 import "./styles.css"
+import Header from "../../components/Header"
 
 function Admin() {
     useEffect(() => {
@@ -23,7 +24,11 @@ function Admin() {
         }
         get()
     }, [])
-    return <div>Admin</div>
+    return (
+        <div>
+            <Header />
+        </div>
+    )
 }
 
 export default Admin
