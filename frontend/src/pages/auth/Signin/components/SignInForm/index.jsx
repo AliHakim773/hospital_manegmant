@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 import { jwtDecode } from "jwt-decode"
 
-import { setUser } from "../../../../core/redux/user/userSlice"
-import { requestData } from "../../../../core/axios"
+import { setUser } from "../../../../../core/redux/user/userSlice"
+import { requestData } from "../../../../../core/axios"
 
 import "./styles.css"
 

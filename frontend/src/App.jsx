@@ -3,8 +3,8 @@ import { Provider } from "react-redux"
 import { store } from "./core/redux/store"
 
 import Home from "./pages/Home"
-import Signin from "./pages/Signin"
-import Signup from "./pages/Signup"
+import Signin from "./pages/auth/Signin"
+import Signup from "./pages/auth/Signup"
 
 import "./styles/index.css"
 import Admin from "./pages/admin"

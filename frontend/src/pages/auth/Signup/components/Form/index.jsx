@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react"
 
 import "./styles.css"
 import { useNavigate } from "react-router-dom"
-import { requestData } from "../../../../core/axios"
+import { requestData } from "../../../../../core/axios"
 
 function Form() {
     const navigate = useNavigate()
@@ -26,8 +26,8 @@ function Form() {
     const [error, setError] = useState("")
 
     const handleOnChange = (e) => {
-        if (e.target.value == "doctor") setRole("doctor")
-        else if (e.target.value == "patient") setRole("patient")
+        if (e.target.value === "doctor") setRole("doctor")
+        else if (e.target.value === "patient") setRole("patient")
         else setRole("admin")
     }
 
@@ -54,7 +54,7 @@ function Form() {
         }
 
         const data = await requestData("/auth/sign-up.php", "POST", body)
-        if (data.status == "fail") {
+        if (data.status === "fail") {
             setError(data.msg)
         } else {
             navigate("/sign-in")
@@ -147,7 +147,7 @@ function Form() {
                     </select>
                 </div>
             </div>
-            {role == "patient" ? (
+            {role === "patient" ? (
                 <div className='form-group d-flex flex-column'>
                     <label htmlFor='medical_history'>Medical History</label>
                     <textarea
@@ -157,7 +157,7 @@ function Form() {
                         rows='10'
                         ref={medicalHistoryEl}></textarea>
                 </div>
-            ) : role == "doctor" ? (
+            ) : role === "doctor" ? (
                 <div className='form-group d-flex flex-column'>
                     <label htmlFor='specialization'>Specialization</label>
                     <input

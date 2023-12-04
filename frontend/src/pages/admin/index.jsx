@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import "./styles.css"
 import { requestData } from "../../core/axios"
+import "./styles.css"
 
 function Admin() {
     useEffect(() => {
