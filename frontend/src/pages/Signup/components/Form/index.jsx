@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react"
 
-import axios from "../../../../core/axios"
+// import axios from "../../../../core/axios"
 
 import "./styles.css"
 import { useNavigate } from "react-router-dom"
+import { requestData } from "../../../../core/axios"
 
 function Form() {
     const navigate = useNavigate()
@@ -52,13 +53,12 @@ function Form() {
             specialization,
         }
 
-        await axios.post("auth/sign-up.php", body).then((res) => {
-            if (res.data.status == "fail") {
-                setError(res.data.msg)
-            } else {
-                navigate("/sign-in")
-            }
-        })
+        const data = await requestData("/auth/sign-up.php", "POST", body)
+        if (data.status == "fail") {
+            setError(data.msg)
+        } else {
+            navigate("/sign-in")
+        }
     }
 
     return (

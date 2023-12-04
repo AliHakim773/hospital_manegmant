@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+
+import { jwtDecode } from "jwt-decode"
+
+import { setUser } from "../../../../core/redux/user/userSlice"
+import { requestData } from "../../../../core/axios"
 
 import "./styles.css"
-import axios from "../../../../core/axios"
-import { jwtDecode } from "jwt-decode"
-import { useDispatch } from "react-redux"
-import { setUser } from "../../../../core/redux/user/userSlice"
-import { useNavigate } from "react-router-dom"
 
 function SignInForm() {
     const usernameEl = useRef()
@@ -22,24 +24,23 @@ function SignInForm() {
             password: passwordEl.current.value,
         }
 
-        await axios.post("auth/sign-in.php", body).then((res) => {
-            if (res.data.status == "fail") {
-                setError(res.data.msg)
+        const data = await requestData("/auth/sign-in.php", "POST", body)
+        if (data.status == "fail") {
+            setError(data.msg)
+        } else {
+            // navigate("/sign-in")
+            const token = data.token
+            localStorage.setItem("token", token)
+            const tokenData = jwtDecode(token)
+            dispatch(setUser(tokenData))
+            if (tokenData.role == "admin") {
+                navigate("/admin")
+            } else if (tokenData.role == "patient") {
+                navigate("/patient")
             } else {
-                // navigate("/sign-in")
-                const token = res.data.token
-                localStorage.setItem("token", token)
-                const tokenData = jwtDecode(token)
-                dispatch(setUser(tokenData))
-                if (tokenData.role == "admin") {
-                    navigate("/admin")
-                } else if (tokenData.role == "patient") {
-                    navigate("/patient")
-                } else {
-                    navigate("/doctor")
-                }
+                navigate("/doctor")
             }
-        })
+        }
     }
 
     return (
