@@ -18,6 +18,13 @@ export const userSlice = createSlice({
                 role,
             }
         },
+        clearUser() {
+            return {
+                username: "",
+                user_id: "",
+                role: "",
+            }
+        },
     },
 })
 
