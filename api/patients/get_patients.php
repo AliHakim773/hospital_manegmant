@@ -1,10 +1,5 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization'); // Include Authorization header
-header('Content-Type: application/json');
-
 include('../database/index.php');
 include('../vendor/autoload.php');
 
