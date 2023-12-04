@@ -1,18 +1,20 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-import { extractUserSlice } from "../../core/redux/user/userSlice"
+import { clearUser, extractUserSlice } from "../../core/redux/user/userSlice"
 
 import "./styles.css"
 
 const Header = () => {
     const userState = useSelector(extractUserSlice)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.removeItem("token")
+        dispatch(clearUser())
         navigate("/")
     }
 
