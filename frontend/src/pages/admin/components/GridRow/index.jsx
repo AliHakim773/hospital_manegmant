@@ -27,7 +27,7 @@ const GridRow = ({ obj, isHead = false }) => {
     return (
         <div className='patient-grid-row'>
             <div className='grid-cell'>{obj.user_id}</div>
-            <div className='grid-cell'>{obj.patient_id}</div>
+            <div className='grid-cell'>{obj.patient_id ?? obj.doctor_id}</div>
             <div className='grid-cell'>{obj.username}</div>
             <div className='grid-cell'>{obj.first_name}</div>
             <div className='grid-cell'>{obj.last_name}</div>
