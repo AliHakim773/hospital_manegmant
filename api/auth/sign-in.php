@@ -48,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $token = JWT::encode($payload, $key, $algorithm);
 
                 $response['status'] = 'logged in';
+                $response['user_id'] = $id;
+                $response['username'] = $username;
+                $response['role'] = $role;
                 $response['token'] = $token;
 
                 echo json_encode($response);

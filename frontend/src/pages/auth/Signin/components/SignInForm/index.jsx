@@ -31,11 +31,16 @@ function SignInForm() {
             // navigate("/sign-in")
             const token = data.token
             localStorage.setItem("token", token)
-            const tokenData = jwtDecode(token)
-            dispatch(setUser(tokenData))
-            if (tokenData.role == "admin") {
+            console.log(data)
+            const user = {
+                username: data.username,
+                userId: data.userId,
+                role: data.role,
+            }
+            dispatch(setUser(user))
+            if (data.role == "admin") {
                 navigate("/admin")
-            } else if (tokenData.role == "patient") {
+            } else if (data.role == "patient") {
                 navigate("/patient")
             } else {
                 navigate("/doctor")

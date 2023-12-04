@@ -11,17 +11,19 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
-            const { username, user_id, role } = action.payload
+            const { username, userId, role } = action.payload
             return {
+                ...state,
                 username,
-                user_id,
+                userId,
                 role,
             }
         },
-        clearUser() {
+        clearUser(state, action) {
             return {
+                ...state,
                 username: "",
-                user_id: "",
+                userId: "",
                 role: "",
             }
         },
