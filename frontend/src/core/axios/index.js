@@ -1,11 +1,17 @@
 // axiosConfig.js
 import axios from "axios"
 
-const instance = axios.create({
-    baseURL: "http://localhost/hospital_manegmant/api/", // Replace with your API domain
-    headers: {
-        "Content-Type": "application/json",
-    },
-})
-
-export default instance
+export const requestData = async (route, method, data, headers) =>
+    await axios
+        .request({
+            url: `http://localhost/hospital_manegmant/api/${route}`,
+            method,
+            data,
+            headers: {
+                "Content-Type": "application/json",
+                ...headers,
+            },
+        })
+        .then((res) => {
+            return res.data
+        })
