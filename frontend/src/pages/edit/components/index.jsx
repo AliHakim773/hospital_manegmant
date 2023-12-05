@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react"
 
 import "./styles.css"
 import { requestData } from "../../../core/axios"
-import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const EditBody = ({ user }) => {
+    const navigate = useNavigate()
+
     const [newUser, setNewUser] = useState({})
     useEffect(() => {
         setNewUser(user)
@@ -33,6 +35,7 @@ const EditBody = ({ user }) => {
         } else if (newUser.role == "patient") {
             requestData("/patients/edit.php", "POST", newUser, headers)
         }
+        navigate("/admin")
     }
     return (
         <div>
