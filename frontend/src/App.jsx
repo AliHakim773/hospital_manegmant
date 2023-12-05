@@ -9,6 +9,7 @@ import Signup from "./pages/auth/Signup"
 import "./styles/index.css"
 import Admin from "./pages/admin"
 import Patient from "./pages/patient"
+import Edit from "./pages/edit"
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route element={<Signup />} path={"/sign-up"} />
                         <Route element={<Admin />} path={"/admin"} />
                         <Route element={<Patient />} path={"/Patient"} />
+                        <Route element={<Edit />} path={"/edit"} />
                     </Routes>
                 </BrowserRouter>
             </div>
