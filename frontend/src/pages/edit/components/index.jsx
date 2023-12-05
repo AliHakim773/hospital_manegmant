@@ -1,10 +1,9 @@
 import React from "react"
 
 import "./styles.css"
-import { useParams } from "react-router-dom"
 
-const EditBody = () => {
-    const { id } = useParams()
+const EditBody = ({ user }) => {
+    console.log(user)
     return (
         <div>
             <form className='edit-form d-flex flex-column'>

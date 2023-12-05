@@ -1,13 +1,18 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 import { requestData } from "../../core/axios"
 
 import Header from "../../components/Header"
-
-import "./styles.css"
 import EditBody from "./components"
 
+import "./styles.css"
+
 const Edit = () => {
+    const { role, id } = useParams()
+
+    const [user, setUser] = useState({})
+
     useEffect(() => {
         const get = async () => {
             const token = localStorage.getItem("token")
@@ -18,21 +23,23 @@ const Edit = () => {
                 console.error("Token not available")
                 return
             }
-            // const getuser =
-            // const patientsData = await requestData(
-            //     "/patients/get_by_id.php",
-            //     "GET",
-            //     {},
-            //     headers
-            // )
-            // setPatients(patientsData)
-            // const doctorsData = await requestData(
-            //     "/doctors/get_by_id.php",
-            //     "GET",
-            //     {},
-            //     headers
-            // )
-            // setDoctors(doctorsData)
+            if (role == "doctor") {
+                const doctor = await requestData(
+                    "/doctors/get_by_id.php?doctor_id=${id}",
+                    "GET",
+                    {},
+                    headers
+                )
+                setUser(doctor.data)
+            } else if (role == "patient") {
+                const patient = await requestData(
+                    `/patients/get_by_id.php?patient_id=${id}`,
+                    "GET",
+                    {},
+                    headers
+                )
+                setUser(patient.data)
+            }
         }
         get()
     }, [])
@@ -43,7 +50,7 @@ const Edit = () => {
                 <section className='section'>
                     <div className='section-content'>
                         <div className='section-body'>
-                            <EditBody />
+                            <EditBody user={user} />
                         </div>
                     </div>
                 </section>

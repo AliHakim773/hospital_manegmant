@@ -32,7 +32,7 @@ try {
         if ($appointment == null) die('appointment not available');
 
         $response['status'] = 'success';
-        $response['date'] = $appointment;
+        $response['data'] = $appointment;
 
         echo json_encode($response);
     } else {
