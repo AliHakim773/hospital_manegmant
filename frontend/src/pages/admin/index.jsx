@@ -27,14 +27,14 @@ function Admin() {
                 return
             }
             const patientsData = await requestData(
-                "/patients/get_patients.php",
+                "/patients/get_all.php",
                 "GET",
                 {},
                 headers
             )
             setPatients(patientsData)
             const doctorsData = await requestData(
-                "/doctors/get_doctors.php",
+                "/doctors/get_all.php",
                 "GET",
                 {},
                 headers

@@ -1,11 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 
 import "./styles.css"
 import { requestData } from "../../../../core/axios"
 
 const GridRow = ({ obj, isHead = false }) => {
-    const [, forceRerender] = useState()
-
     const handleDelete = () => {
         const token = localStorage.getItem("token")
         const headers = {
@@ -21,7 +19,7 @@ const GridRow = ({ obj, isHead = false }) => {
             {},
             headers
         )
-        forceRerender(Math.random())
+        window.location.reload()
     }
 
     return (
