@@ -34,20 +34,14 @@ $query->bind_result($role);
 $query->fetch();
 
 try {
-    if ($data->role == 'admin') {
 
-        $query = $mysqli->prepare('delete from users where user_id=?');
-        $query->bind_param('i', $user_id);
-        $query->execute();
+    $query = $mysqli->prepare('delete from users where user_id=?');
+    $query->bind_param('i', $user_id);
+    $query->execute();
 
-        $response['status'] = 'success';
+    $response['status'] = 'success';
 
-        echo json_encode($response);
-    } else {
-        $response['status'] = 'fail';
-        $response['msg'] = 'access denied';
-        echo json_encode($response);
-    }
+    echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'error';

@@ -35,48 +35,36 @@ try {
 }
 
 try {
-    if ($data->role == 'admin') {
-        //checking if the patient exists
-        $query = $mysqli->prepare('select role from users where user_id=?');
-        $query->bind_param('s', $user_id);
-        $query->execute();
+    //checking if the patient exists
+    $query = $mysqli->prepare('select role from users where user_id=?');
+    $query->bind_param('s', $user_id);
+    $query->execute();
 
-        $query->store_result();
-        $num_rows = $query->num_rows;
-        $query->bind_result($role);
-        $query->fetch();
+    $query->store_result();
+    $num_rows = $query->num_rows;
+    $query->bind_result($role);
+    $query->fetch();
 
-        if ($num_rows == 0)
-            die("user doen't exist");
-        if ($role != "patient")
-            die('not a patient');
+    if ($num_rows == 0)
+        die("user doen't exist");
+    if ($role != "patient")
+        die('not a patient');
 
-        if ($data->role == 'admin') {
-            $query =
-                $mysqli->prepare('update information 
+    $query =
+        $mysqli->prepare('update information 
             set first_name=?, last_name=?, date_of_birth=?, address=?, email=?, phone_number=? 
             where user_id=?');
-            $query->bind_param('sssssii', $first_name, $last_name, $date_of_birth, $address, $email, $phone_number, $user_id);
-            $query->execute();
-            $query =
-                $mysqli->prepare('update patients 
+    $query->bind_param('sssssii', $first_name, $last_name, $date_of_birth, $address, $email, $phone_number, $user_id);
+    $query->execute();
+    $query =
+        $mysqli->prepare('update patients 
                     set medical_history=?
                     where user_id=?');
-            $query->bind_param('si', $medical_history, $user_id);
-            $query->execute();
-            $response['status'] = 'success';
-            $response['msg'] = 'update successful';
-            echo json_encode($response);
-        } else {
-            $response['status'] = 'fail';
-            $response['msg'] = 'access denied';
-            echo json_encode($response);
-        }
-    } else {
-        $response['status'] = 'fail';
-        $response['msg'] = 'access denied';
-        echo json_encode($response);
-    }
+    $query->bind_param('si', $medical_history, $user_id);
+    $query->execute();
+    $response['status'] = 'success';
+    $response['msg'] = 'update successful';
+    echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'error';

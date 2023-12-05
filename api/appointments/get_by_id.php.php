@@ -22,24 +22,18 @@ try {
 $appointment_id = $_GET['appointment_id'];
 
 try {
-    if ($data->role == 'admin') {
-        $query = $mysqli->prepare('select * from appointments where appointment_id=?');
-        $query->bind_param('i', $appointment_id);
-        $query->execute();
+    $query = $mysqli->prepare('select * from appointments where appointment_id=?');
+    $query->bind_param('i', $appointment_id);
+    $query->execute();
 
-        $appointment = $query->get_result()->fetch_assoc();
+    $appointment = $query->get_result()->fetch_assoc();
 
-        if ($appointment == null) die('appointment not available');
+    if ($appointment == null) die('appointment not available');
 
-        $response['status'] = 'success';
-        $response['data'] = $appointment;
+    $response['status'] = 'success';
+    $response['data'] = $appointment;
 
-        echo json_encode($response);
-    } else {
-        $response['status'] = 'fail';
-        $response['msg'] = 'access denied';
-        echo json_encode($response);
-    }
+    echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'failed to get appointment';

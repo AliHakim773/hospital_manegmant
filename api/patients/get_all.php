@@ -20,26 +20,20 @@ try {
 }
 
 try {
-    if ($data->role == 'admin') {
-        $query = $mysqli->prepare('select patients.*, information.*, users.* from users 
+    $query = $mysqli->prepare('select patients.*, information.*, users.* from users 
                     join patients on users.user_id = patients.user_id 
                     join information on users.user_id = information.user_id ');
-        $query->execute();
+    $query->execute();
 
-        $array = $query->get_result();
+    $array = $query->get_result();
 
-        while ($patients = $array->fetch_assoc()) {
-            $response[] = $patients;
-        }
-        $response['status'] = 'success';
-
-
-        echo json_encode($response);
-    } else {
-        $response['status'] = 'fail';
-        $response['msg'] = 'access denied';
-        echo json_encode($response);
+    while ($patients = $array->fetch_assoc()) {
+        $response[] = $patients;
     }
+    $response['status'] = 'success';
+
+
+    echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'error';

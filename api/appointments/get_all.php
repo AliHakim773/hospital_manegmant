@@ -20,23 +20,17 @@ try {
 }
 
 try {
-    if ($data->role == 'admin') {
-        $query = $mysqli->prepare('select * from appointments');
-        $query->execute();
+    $query = $mysqli->prepare('select * from appointments');
+    $query->execute();
 
-        $array = $query->get_result();
+    $array = $query->get_result();
 
-        while ($doctors = $array->fetch_assoc()) {
-            $response[] = $doctors;
-        }
-        $response['status'] = 'success';
-
-        echo json_encode($response);
-    } else {
-        $response['status'] = 'fail';
-        $response['msg'] = 'access denied';
-        echo json_encode($response);
+    while ($doctors = $array->fetch_assoc()) {
+        $response[] = $doctors;
     }
+    $response['status'] = 'success';
+
+    echo json_encode($response);
 } catch (Exception $e) {
     $response['status'] = 'fail';
     $response['msg'] = 'failed to get appointments';
