@@ -2,6 +2,7 @@ import React from "react"
 
 import "./styles.css"
 import Header from "../../components/Header"
+import { Link } from "react-router-dom"
 
 const Patient = () => {
     return (
@@ -9,7 +10,9 @@ const Patient = () => {
             <Header />
             <section className='section'>
                 <div className='section-content'>
-                    <button className='btn'>Add Appointment</button>
+                    <Link to={"/add-appointment"} className='btn'>
+                        Add Appointment
+                    </Link>
                 </div>
             </section>
             <section className='section'>

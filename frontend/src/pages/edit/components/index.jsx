@@ -29,7 +29,6 @@ const EditBody = ({ user }) => {
             console.error("Token not available")
             return
         }
-        console.log(newUser)
         if (newUser.role == "doctor") {
             requestData("/doctors/edit.php", "POST", newUser, headers)
         } else if (newUser.role == "patient") {

@@ -10,6 +10,7 @@ import "./styles/index.css"
 import Admin from "./pages/admin"
 import Patient from "./pages/patient"
 import Edit from "./pages/edit"
+import AddAppointment from "./pages/addApointment"
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                         <Route element={<Admin />} path={"/admin"} />
                         <Route element={<Patient />} path={"/Patient"} />
                         <Route element={<Edit />} path={"/edit/:role/:id"} />
+                        <Route
+                            element={<AddAppointment />}
+                            path={"/add-appointment"}
+                        />
                     </Routes>
                 </BrowserRouter>
             </div>
