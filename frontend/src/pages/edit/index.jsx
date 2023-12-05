@@ -25,7 +25,7 @@ const Edit = () => {
             }
             if (role == "doctor") {
                 const doctor = await requestData(
-                    "/doctors/get_by_id.php?doctor_id=${id}",
+                    `/doctors/get_by_id.php?doctor_id=${id}`,
                     "GET",
                     {},
                     headers

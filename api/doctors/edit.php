@@ -6,19 +6,22 @@ include('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
+$json_data = file_get_contents("php://input");
+$data = json_decode($json_data, true);
+
 $allheaders = getallheaders();
 $token = $allheaders['Authorization'];
 $secretKey = 'secret';
 
-$user_id = $_POST['user_id'];
-$first_name = $_POST['f_name'];
-$last_name = $_POST['l_name'];
-$date_of_birth = $_POST['dob'];
-$address = $_POST['address'];
-$gender = $_POST['gender'];
-$email = $_POST['email'];
-$phone_number = $_POST['phone_number'];
-$specialization = $_POST['specialization'];
+$user_id = $data['user_id'];
+$first_name = $data['first_name'];
+$last_name = $data['last_name'];
+$date_of_birth = $data['date_of_birth'];
+$address = $data['address'];
+$gender = $data['gender'];
+$email = $data['email'];
+$phone_number = $data['phone_number'];
+$specialization = $data['specialization'];
 
 $response = [];
 try {

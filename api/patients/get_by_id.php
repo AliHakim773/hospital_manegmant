@@ -35,7 +35,7 @@ try {
         if ($patient == null) die('patient not available');
 
         $response['status'] = 'success';
-        $response['date'] = $patient;
+        $response['data'] = $patient;
 
         echo json_encode($response);
     } else {
