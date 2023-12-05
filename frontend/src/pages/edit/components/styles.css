@@ -1,0 +1,10 @@
+.edit-form {
+    gap: 10px;
+}
+.edit-form > div > label {
+    display: inline-block;
+    width: 120px;
+}
+.edit-form > input[type="submit"] {
+    width: 100px;
+}
