@@ -2,8 +2,11 @@ import React from "react"
 
 import "./styles.css"
 import { requestData } from "../../../../core/axios"
+import { useNavigate } from "react-router-dom"
 
 const GridRow = ({ obj, isHead = false }) => {
+    const navigate = useNavigate()
+
     const handleDelete = () => {
         const token = localStorage.getItem("token")
         const headers = {
@@ -20,6 +23,9 @@ const GridRow = ({ obj, isHead = false }) => {
             headers
         )
         window.location.reload()
+    }
+    const handleEdit = () => {
+        navigate("/edit")
     }
 
     return (
@@ -40,7 +46,9 @@ const GridRow = ({ obj, isHead = false }) => {
             <div className='grid-cell'>
                 {!isHead && (
                     <div className='d-flex flex-column'>
-                        <button className='btn'>Edit</button>
+                        <button className='btn' onClick={handleEdit}>
+                            Edit
+                        </button>
                         <button className='btn' onClick={handleDelete}>
                             X
                         </button>
