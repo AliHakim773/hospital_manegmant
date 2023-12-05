@@ -25,7 +25,7 @@ const GridRow = ({ obj, isHead = false }) => {
         window.location.reload()
     }
     const handleEdit = () => {
-        navigate("/edit")
+        navigate(`/edit/${obj.patient_id ?? obj.doctor_id}`)
     }
 
     return (
